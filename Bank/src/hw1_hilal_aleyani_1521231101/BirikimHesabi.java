@@ -11,49 +11,48 @@ import java.util.ArrayList;
  *
  * @author macbookpro
  */
-public class BirikimHesabi extends Hesap{
+public class BirikimHesabi extends Hesap {
+
     private double ilkyatirma;
     private double tutar;
     protected double oran;
-    Banka banka=new Banka();
-    
-    
-    
-    public BirikimHesabi(double ilkyatirma, double tutar, double oran, String id, double bakiye) {
-        super(id, bakiye);
-        this.ilkyatirma = ilkyatirma;
-        this.tutar = tutar;
-        this.oran = oran;
-        
-        if (this.ilkyatirma>=100) {
-            this.ilkyatirma = ilkyatirma;
-        }else if(this.ilkyatirma<=10.000){
-            this.ilkyatirma+=200;
-            System.out.println("Hesabiniza 200 TL Eklendi.");
-        }
-        else System.out.println(" yatirma islemi gerceklesmiyor ......");
-    }
-    
-    
+    Banka banka = new Banka();
 
-    
+    public BirikimHesabi(String id, double ilkyatirma) {
+        super(id, ilkyatirma);
+        this.ilkyatirma = ilkyatirma;
+
+        if (this.ilkyatirma >= 100) {
+            this.ilkyatirma = ilkyatirma;
+        } else if (this.ilkyatirma <= 10.000) {
+            this.ilkyatirma += 200;
+            System.out.println("Hesabiniza 200 TL Eklendi.");
+        } else {
+            System.out.println(" yatirma islemi gerceklesmiyor ......");
+        }
+
+    }
+
     @Override
-    public boolean paracekme(double tutar){
-        if (this.bakiye>10) { 
-        this.bakiye=this.bakiye-tutar+10;
-            
-        }else System.out.println("paraniniz yok ");
-        return true;
+    public boolean paracekme(double tutar) {
+        if (this.bakiye > 10) {
+            this.bakiye = this.bakiye - tutar + 10;
+            return true;
+
+        } else {
+            System.out.println("paraniniz yok ");
+            return false;
+        }
     }
-    
-    public void parayatirma(double tutar){
-        this.bakiye=this.bakiye+tutar;
+
+    public void parayatirma(double tutar) {
+        this.bakiye = this.bakiye + tutar;
     }
-    
-    public double faiz(double oran){
-       double artilan=(this.bakiye*oran)/100;
-        
-       return this.bakiye+artilan; 
+
+    public double faiz(double oran) {
+        double artilan = (this.bakiye * oran) / 100;
+
+        return this.bakiye + artilan;
     }
-    
+
 }
